@@ -1,4 +1,31 @@
 .welcome-page {
-    margin-top: 10rem;
-    
-};
+    width: min(900px, 100%);
+    padding: 2.6rem 1.5rem;
+
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-page::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        radial-gradient(700px 280px at 20% 0%, rgba(168, 85, 247, 0.40), transparent 55%),
+        radial-gradient(600px 260px at 90% 20%, rgba(59, 130, 246, 0.30), transparent 55%);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.welcome-page > * {
+    position: relative;
+}
+
+.welcome-page h1 {
+    margin: 0;
+}

@@ -2,7 +2,7 @@
  
  function HomePage () {
     return (
-        <section>
+        <section className="page">
             <div className='welcome-page'>
                 <h1>Welcome to SafeBite</h1>
             </div>

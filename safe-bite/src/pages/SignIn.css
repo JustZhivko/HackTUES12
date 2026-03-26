@@ -1,5 +1,26 @@
 .sign-in {
-    margin-top: 5rem;
-};
+    width: min(430px, 100%);
+    padding: 2.2rem 1.6rem;
 
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: var(--shadow);
 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-text {
+    margin-bottom: 1.5rem;
+}
+
+.sign-in .email,
+.sign-in .password {
+    margin-top: 1rem;
+}
+
+.sign-in .login-btn {
+    margin-top: 1.25rem;
+}

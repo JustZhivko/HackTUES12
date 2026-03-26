@@ -2,7 +2,7 @@ import './SignUp.css';
 
 function SignUp () {
     return (
-        <section>
+        <section className="page">
             <div className="sign-up">
                 <h1 className="sign-in-text">Sign Up</h1>
                 <div>
