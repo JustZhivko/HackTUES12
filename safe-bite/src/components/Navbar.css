@@ -1,0 +1,11 @@
+.navigation {
+    display: flex;
+    gap: 2rem;
+    background-color: #8ba6db;
+    padding: 1.2rem;
+
+};
+
+.lnk {
+    color:#8ba6db;
+};
