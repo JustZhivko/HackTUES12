@@ -1,17 +1,24 @@
 import './Dashboard.css';
+import { useAuth } from "../AuthContext";
 
 function Dashboard () {
+    const { user } = useAuth();
+
     return (
         <section className="page dashboard-page">
             <div className='dashboard-shell'>
                 <div className='dashboard-header'>
                     <h1>Dashboard</h1>
-                    <p>Overview of your profile and activity.</p>
+                    <p>
+                        {user
+                            ? `Signed in as ${user.name ?? user.email}`
+                            : "Loading your profile..."}
+                    </p>
                 </div>
                 <div className='dashboard-grid'>
                     <div className='profile-pic card'>
                         <h2>Profile</h2>
-                        <p>Some user smth (not done)</p>
+                        <p>{user ? user.email : ""}</p>
                     </div>
 
                     <div className='profile-stats card'>
