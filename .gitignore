@@ -211,3 +211,7 @@ backend/*.db
 backend/*.db-wal
 backend/*.db-shm
 backend/*-journal
+
+
+#ESP32_TEST WIFI credentials
+ESP32/ESP32_TEST/secrets.h
