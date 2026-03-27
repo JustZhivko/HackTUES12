@@ -2,11 +2,13 @@ import './About.css';
 
 function About () {
     return (
+        <section>
         <div className="about-page">
             <div className='about-title'>
                 <h1>About us</h1>
             </div>
             <div className='description'>
+                <div className='card'>
                 <p className='text-desc'>
                     SafeBite е иновативно асистивно технологично решение, създадено с една цел — да даде на хората с увредено зрение пълна независимост при избора на храна.
                     
@@ -18,8 +20,35 @@ function About () {
 
                     Придружаващият уебсайт дава допълнителна информация за сканираните продукти, история на проверките и настройки за персонализация.
                 </p>
+                </div>
             </div>
         </div>
+        <div className='team-grid'>
+                <div className='team card'>
+                    <div className='card'>
+                        <h2>Elitsa K.</h2>
+                    </div>
+                </div>
+
+                <div className='team card'>
+                    <div className='card'>
+                        <h2>Zhivko U.</h2>
+                    </div>
+                </div>
+
+                <div className='team card'>
+                    <div className='card'>
+                        <h2>Nikola Ch.</h2>
+                    </div>
+                </div>
+
+                <div className='team card'>
+                    <div className='card'>
+                        <h2>Ivan I. (mentor)</h2>
+                    </div>
+                </div>
+        </div>
+        </section>
     )
 }
 

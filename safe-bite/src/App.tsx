@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
+import ItemCalendar from './pages/ItemCalendar';
 import { AuthProvider, useAuth } from "./AuthContext";
 import RequireAuth from "./RequireAuth";
 
@@ -25,6 +26,14 @@ function AppRoutes() {
         element={
           <RequireAuth>
             <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/items"
+        element={
+          <RequireAuth>
+            <ItemCalendar />
           </RequireAuth>
         }
       />

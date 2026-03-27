@@ -4,7 +4,7 @@
 
 .description {
     margin-top: 3rem; 
-    margin: 4rem;
+    margin: 2rem;
 }
 
 .about-title {
@@ -13,4 +13,24 @@
 
 .text-desc {
     text-align: center;
+    margin: 2rem;
+}
+.team-grid {
+    display: grid;
+    grid-auto-flow: column;  
+    grid-auto-columns: 0.5fr;
+    gap: 1rem;
+    margin: 0.5rem;
+    padding: 2rem;
+}
+
+.card {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: var(--shadow);
+    text-align: left;
+    margin-bottom: 1rem;
 }
