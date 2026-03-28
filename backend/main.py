@@ -1,12 +1,13 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from google import genai
 from dotenv import load_dotenv
 import os
-import time
+from datetime import datetime
 from tts import tts
+from flask_cors import CORS
 
 app = Flask(__name__)
-message_log = []
+CORS(app)
 
 def configure():
     load_dotenv()
@@ -20,12 +21,22 @@ def receive_message():
     if request.method == "POST":
         image_data = request.data
 
-        filename = f"image{int(time.time())}.jpg"
+        if not request.data:
+            return {"error": "No image received"}, 400
+
+        i = 1
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"image_{timestamp}.jpg"
+
+        while os.path.exists(filename):
+            filename = f"image_{timestamp}_{i}.jpg"
+            i += 1
 
         with open(filename, "wb") as f:
             f.write(image_data)
 
         uploaded_file = client.files.upload(file=filename)
+
         prompt = '''Purpose:
             - Analyze the food in the picture
             - You are an assistant for blind people
@@ -47,10 +58,15 @@ def receive_message():
 
         tts(str(text_response))
 
-        return "<p>Message received and processed.</p>", 200
+        return jsonify({
+            "status": "success",
+            "text": text_response
+        }), 200
     
     else:
-        return "Flask receiver is running!", 200   
+        return jsonify({
+            "status": "running"
+        }), 200 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
