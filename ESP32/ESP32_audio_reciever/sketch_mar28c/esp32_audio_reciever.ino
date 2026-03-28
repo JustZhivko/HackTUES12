@@ -8,7 +8,7 @@ const char* password = WIFI_PASSWORD;
 const char* url = "http://<APP_SERVER_IP>:5000/audio.wav"; 
 
 
-const int pwmPin = 5;p
+const int pwmPin = 5;
 const int pwmFreq = 50000;
 const int resolution = 8;
 
