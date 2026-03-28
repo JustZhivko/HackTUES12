@@ -4,11 +4,10 @@ import os
 from datetime import datetime, timezone
 
 from dotenv import load_dotenv
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, jsonify
 from google import genai
 
 from tts import tts
-from flask_cors import CORS
 
 app = Flask(__name__)
 
