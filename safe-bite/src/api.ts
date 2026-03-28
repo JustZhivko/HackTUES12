@@ -4,7 +4,17 @@ export type ApiUser = {
   name: string | null;
 };
 
+export type FoodCapture = {
+  id: number;
+  filename: string;
+  response_text: string;
+  created_at: string;
+};
+
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:5000";
+
+export const CAPTURES_API_BASE =
+  import.meta.env.VITE_CAPTURES_API ?? "http://127.0.0.1:5001";
 
 async function requestJson<T>(
   path: string,
@@ -67,5 +77,17 @@ export async function logout(): Promise<void> {
     method: "POST",
     body: JSON.stringify({}),
   });
+}
+
+export function captureImageUrl(filename: string): string {
+  const base = CAPTURES_API_BASE.replace(/\/$/, "");
+  return `${base}/uploads/${encodeURIComponent(filename)}`;
+}
+
+export async function listCaptures(): Promise<FoodCapture[]> {
+  const data = await requestJson<{ captures: FoodCapture[] }>(`/api/captures`, {
+    method: "GET",
+  });
+  return data.captures;
 }
 

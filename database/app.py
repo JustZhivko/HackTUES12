@@ -61,6 +61,16 @@ def create_app() -> Flask:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS food_captures (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    filename TEXT NOT NULL,
+                    response_text TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                )
+                """
+            )
             conn.commit()
         finally:
             conn.close()
@@ -164,6 +174,26 @@ def create_app() -> Flask:
     def me():
         user = current_user()
         return jsonify({"user": user}), 200
+
+    @app.get("/api/captures")
+    def list_captures():
+        user = current_user()
+        if user is None:
+            return jsonify({"error": "Unauthorized."}), 401
+
+        conn = get_conn()
+        try:
+            rows = conn.execute(
+                """
+                SELECT id, filename, response_text, created_at
+                FROM food_captures
+                ORDER BY datetime(created_at) DESC
+                """
+            ).fetchall()
+            captures = [dict(r) for r in rows]
+            return jsonify({"captures": captures}), 200
+        finally:
+            conn.close()
 
     return app
 
