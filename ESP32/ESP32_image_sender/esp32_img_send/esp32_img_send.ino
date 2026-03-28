@@ -3,18 +3,18 @@
 #include <HTTPClient.h>
 #include "secrets.h"
 
-// --- WiFi ---
+
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASSWORD;
 
-// --- Flask server ---
+
 const char* serverUrl = "http://<APP_SERVER_IP>:5000/message";
 
-// --- Button ---
+
 #define BUTTON_PIN 13
 bool lastButtonState = HIGH;
 
-// --- Camera AI Thinker pins ---
+
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
 #define XCLK_GPIO_NUM      0
@@ -56,7 +56,7 @@ void setupCamera() {
   config.pixel_format = PIXFORMAT_JPEG;
   config.frame_size = FRAMESIZE_XGA;
   config.jpeg_quality = 10;
-  config.fb_count = 2; // helps reduce stale frames
+  config.fb_count = 2;
 
   esp_camera_init(&config);
 }
@@ -83,15 +83,15 @@ void loop() {
   bool buttonState = digitalRead(BUTTON_PIN);
   
   if (lastButtonState == HIGH && buttonState == LOW) {
-    camera_fb_t * fb = esp_camera_fb_get(); // discard old frame
+    camera_fb_t * fb = esp_camera_fb_get();
     if (fb) esp_camera_fb_return(fb);
 
-    fb = esp_camera_fb_get(); // capture fresh frame
+    fb = esp_camera_fb_get();
     if (fb) {
       sendPhoto(fb);
       esp_camera_fb_return(fb);
     }
-    delay(500); // simple debounce
+    delay(500);
   }
   
   lastButtonState = buttonState;
