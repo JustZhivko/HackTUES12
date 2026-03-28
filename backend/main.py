@@ -1,20 +1,13 @@
-import sqlite3
-import time
-import os
-from datetime import datetime, timezone
-
-from dotenv import load_dotenv
-from flask import Flask, request, send_from_directory
+from flask import Flask, request
 from google import genai
-
+from dotenv import load_dotenv
+import os
+import time
 from tts import tts
+from flask_cors import CORS
 
 app = Flask(__name__)
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
+message_log = []
 
 def configure():
     load_dotenv()
@@ -61,13 +54,12 @@ def receive_message():
         image_data = request.data
 
         filename = f"image{int(time.time())}.jpg"
-        file_path = os.path.join(UPLOAD_DIR, filename)
 
         with open(file_path, "wb") as f:
             f.write(image_data)
 
-        uploaded_file = client.files.upload(file=file_path)
-        prompt = """Purpose:
+        uploaded_file = client.files.upload(file=filename)
+        prompt = '''Purpose:
             - Analyze the food in the picture
             - You are an assistant for blind people
             - You need to check if the food is eatable and safe to consume
@@ -99,8 +91,9 @@ def receive_message():
         tts(str(text_response))
 
         return "<p>Message received and processed.</p>", 200
-
-    return "Flask receiver is running!", 200
+    
+    else:
+        return "Flask receiver is running!", 200   
 
 
 if __name__ == "__main__":
