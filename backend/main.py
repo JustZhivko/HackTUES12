@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timezone
 
 from dotenv import load_dotenv
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, send_from_directory, jsonify, send_file
 from google import genai
 
 from tts import tts
@@ -107,6 +107,10 @@ def receive_message():
         return jsonify({
             "status": "running"
         }), 200 
+
+@app.route("/audio.wav")
+def send_audio():
+    return send_file("audio.wav", mimetype="audio/wav")
 
 if __name__ == "__main__":
     
